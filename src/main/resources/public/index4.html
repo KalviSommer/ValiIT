@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<input id="a">
+<button id="button">GenerateArray</button>
+<button id="decButton">DecreasingArray</button>
+<button id="yl3Button">yl3</button>
+<button id="fibonacciButton">Fibonacci</button>
+<br>
+<input id="b">
+<input id="c">
+<button id="multiplyTableButton">MultiplyTable</button>
+<table id="resultTable">
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+    </tr>
+</table>
+<br>
+<table id="multiplyTable">
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+        <td>*</td>
+    </tr>
+</table>
+<script>
+    let button = document.getElementById("button");
+    button.onclick = function (){
+        let a = document.getElementById("a").value;
+        let resultTable = document.getElementById("resultTable");
+        resultTable.innerHTML = "";
+        let data = generateArray(a);
+        let row = document.createElement("tr");
+        for(let i = 0; i < data.length; i++){
+            let cell = document.createElement("td");
+            cell.innerText = data[i];
+            resultTable.appendChild(row);
+            row.appendChild(cell);
+        }
+    }
+    let decButton = document.getElementById("decButton");
+    decButton.onclick = function (){
+        let a = document.getElementById("a").value;
+        let resultTable = document.getElementById("resultTable");
+        resultTable.innerHTML = "";
+        let data = decreasingArray(Number(a));
+        let row = document.createElement("tr");
+        for(let i = 0; i < data.length; i++){
+            let cell = document.createElement("td");
+            cell.innerText = data[i];
+            resultTable.appendChild(row);
+            row.appendChild(cell);
+        }
+    }
+    let yl3Button = document.getElementById("yl3Button");
+    yl3Button.onclick = function (){
+        let a = document.getElementById("a").value;
+        let resultTable = document.getElementById("resultTable");
+        resultTable.innerHTML = "";
+        let data = yl3(Number(a));
+        let row = document.createElement("tr");
+        for(let i = 0; i < data.length; i++){
+            let cell = document.createElement("td");
+            cell.innerText = data[i];
+            resultTable.appendChild(row);
+            row.appendChild(cell);
+        }
+    }
+    let multiplyTableButton = document.getElementById("multiplyTableButton");
+    multiplyTableButton.onclick = function (){
+        let b = document.getElementById("b").value;
+        let c = document.getElementById("c").value;
+        let multiplyTable = document.getElementById("multiplyTable");
+        multiplyTable.innerHTML = "";
+        for(let i = 1; i <= b; i++){
+            let row = document.createElement("tr");
+            multiplyTable.appendChild(row);
+            for(let j = 1; j <= c; j++){
+                let cell = document.createElement("td");
+                cell.innerText = i*j;
+                row.appendChild(cell);
+            }
+        }
+    }
+    let fibonacciButton = document.getElementById("fibonacciButton");
+    fibonacciButton.onclick = function (){
+        let a = document.getElementById("a").value;
+        let resultTable = document.getElementById("resultTable");
+        resultTable.innerText = "";
+        let data = fibonacci(Number(a));
+        let row = document.createElement("tr");
+        for(let i = 0; i <data.length; i++){
+            let cell = document.createElement("td");
+            cell.innerText = data[i];
+            resultTable.appendChild(row);
+            row.appendChild(cell);
+        }
+    }
+
+    function generateArray(n) {
+        let result = [];
+        for (let i = 0; i < n; i++) {
+            result[i] = i + 1;
+        }
+        return result;
+    }
+    function decreasingArray(n) {
+        let newArray = [];
+        if (n >= 0) {
+            for (let i = n; i >= 0; i--) {
+                newArray[i] = n - i;
+            }
+        } else {
+            for (let i = 0; i <= -n; i++) {
+                newArray[i] = n + i;
+            }
+        }
+        return newArray;
+    }
+    function yl3(n) {
+        let newArray  = [];
+        for (let i = 0; i < n;i++) {
+            newArray[i] = 3;
+        }
+        return newArray;
+    }
+    function fibonacci(n) {
+        let n1 = 0;
+        let n2 = 1;
+        let n3;
+        let fibArray = [];
+        fibArray[0] = 0;
+        if (n > 0) {
+            fibArray[1] = 1;
+            for (let i = 2; i <= n; i++) {
+                n3 = n1 + n2;
+                fibArray[i] = n3;
+                n1 = n2;
+                n2 = n3;
+            }
+        }
+        return fibArray;
+    }
+</script>
+</body>
+</html>

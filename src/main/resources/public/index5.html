@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+First name:<input id="a">
+<br>
+Last name:<input id="b">
+<br>
+Address:<input id="c">
+<br>
+<button id="clientButton">Create client!</button>
+<span id="createAnswer">Here comes client details!</span>
+<br>
+<br>
+Account nr:<input id="d">
+<br>
+Client id:<input id="e">
+<br>
+<button id="accountButton">Create account!</button>
+<br>
+<span id="accountAnswer">The account details!</span>
+<br>
+<br>
+Account number:<input id="f">
+Receiver account number:<input id="h">
+<br>
+Amount:<input id="g">
+<br>
+<button id="balanceButton">Get account balance!</button>
+<span id="balanceAnswer">Account balance!</span>
+<br>
+<button id="depositButton">Deposit money!</button>
+<span id="depositAnswer">Deposit details!</span>
+<br>
+<button id="withdrawButton">Withdraw money!</button>
+<span id="withdrawAnswer">Withdraw details!</span>
+<br>
+<button id="transferButton">Transfer money!</button>
+<span id="transferAnswer">Transfer details!</span>
+<br>
+<button id="lockButton">Lock account!</button>
+<span id="lockAnswer">Account locked!</span>
+<br>
+<button id="unlockButton">Unlock account!</button>
+<span id="unlockAnswer">Account unlocked!</span>
+<br>
+<button id="accountInfoButton">Get account info!</button>
+<span id="accountInfoAnswer">Here's account info!</span>
+<table id="accountInfoTable">
+</table>
+<br>
+<br>
+Just push button!<button id="showAll">Get all accounts</button>
+<span id="answer">The answer is in the table!</span>
+<table id="answerTable">
+</table>
+<script>
+    let clientButton = document.getElementById("clientButton");
+    clientButton.onclick = function () {
+        let a = document.getElementById("a");
+        let url = '/lesson4/createClient/'
+        let body = {
+            firstName: a.value,
+            lastName: b.value,
+            address: c.value
+        }
+        let options = {  // options objekti pole vaja kui tegu on GET päringuga
+            method: 'POST', //seda ei ole vaja kui tegu on GET päringuga
+            body: JSON.stringify(body),  //seda pole vaja kui ei ole RequestBody
+            headers: {  // seda ei ole vaja kui tegu ei ole RequestBody
+                'Content-Type': 'application/json'
+            }
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("createAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let accountButton = document.getElementById("accountButton");
+    accountButton.onclick = function () {
+        let d = document.getElementById("d");
+        let e = document.getElementById("e");
+        let url = '/lesson4/account/' + d.value + "/" + e.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'POST', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("accountAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let balanceButton = document.getElementById("balanceButton");
+    balanceButton.onclick = function () {
+        let f = document.getElementById("f");
+        let url = '/lesson4/account/' + f.value
+        fetch(url)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("balanceAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let depositButton = document.getElementById("depositButton");
+    depositButton.onclick = function () {
+        let f = document.getElementById("f");
+        let g = document.getElementById("g");
+        let url = '/lesson4/account/' + f.value + "/" + g.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'PUT', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("depositAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let withdrawButton = document.getElementById("withdrawButton");
+    withdrawButton.onclick = function () {
+        let f = document.getElementById("f");
+        let g = document.getElementById("g");
+        let url = '/lesson4/account/withdraw/' + f.value + "/" + g.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'PUT', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("withdrawAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let transferButton = document.getElementById("transferButton");
+    transferButton.onclick = function () {
+        let f = document.getElementById("f");
+        let g = document.getElementById("g");
+        let h = document.getElementById("h");
+        let url = '/lesson4/account/transfer/' + f.value + "/" + g.value + "/" + h.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'PUT', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("transferAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let lockButton = document.getElementById("lockButton");
+    lockButton.onclick = function () {
+        let f = document.getElementById("f");
+        let url = '/lesson4/lockAccount/' + f.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'PUT', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("lockAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let unlockButton = document.getElementById("unlockButton");
+    unlockButton.onclick = function () {
+        let f = document.getElementById("f");
+        let url = '/lesson4/unlockAccount/' + f.value
+        let options = { // options objekti ei ole vaja kui tegu on GET päringuga
+            method: 'PUT', // seda ei ole vaja kui tegu on GET päringuga
+        }
+        fetch(url, options)
+            .then(result => result.text())
+            .then(function (result) {
+                let answer = document.getElementById("unlockAnswer");
+                answer.innerText = result;
+            })
+    }
+
+    let accountInfoButton = document.getElementById("accountInfoButton")
+    accountInfoButton.onclick = function(){
+        let f = document.getElementById("f");
+        let url = '/lesson4/accountInfo/' + f.value;
+        fetch(url)
+            .then(result => result.json())
+            .then(function (result) {
+                let a  = document.getElementById("accountInfoTable");
+                a.innerText = "";
+                    let row = document.createElement("tr");
+                    a.appendChild(row);
+                    let cell = document.createElement("td");
+                    row.append(cell);
+                    cell.innerText = result.accountNr;
+                    let cell2 = document.createElement("td");
+                    row.append(cell2);
+                    cell2.innerText = result.balance;
+                    let cell3 = document.createElement("td");
+                    row.append(cell3);
+                    cell3.innerText = result.firstName;
+                    let cell4 = document.createElement("td");
+                    row.append(cell4);
+                    cell4.innerText = result.lastName;
+                    let cell5 = document.createElement("td");
+                    row.append(cell5);
+                    cell5.innerText = result.address;
+                    let cell6 = document.createElement("td");
+                    row.append(cell6);
+                    cell6.innerText = result.clientId;
+                    let cell7 = document.createElement("td");
+                    row.append(cell7);
+                    cell7.innerText = result.status;
+            })
+    }
+
+    let showAllButton = document.getElementById("showAll")
+    showAllButton.onclick = function(){
+        fetch('/lesson4/accounts')
+            .then(result => result.json())
+            .then(function (result) {
+                let a = document.getElementById("answerTable");
+                answerTable.innerText = "";
+                for(let i = 0; i < result.length; i++){
+                    let row = document.createElement("tr");
+                    a.appendChild(row)
+                    let cell = document.createElement("td");
+                    row.append(cell);
+                    cell.innerText = result[i].accountNr;
+                    let cell2 = document.createElement("td");
+                    row.append(cell2);
+                    cell2.innerText = result[i].balance;
+                    let cell3 = document.createElement("td");
+                    row.append(cell3);
+                    cell3.innerText = result[i].firstName;
+                    let cell4 = document.createElement("td");
+                    row.append(cell4);
+                    cell4.innerText = result[i].lastName;
+                    let cell5 = document.createElement("td");
+                    row.append(cell5);
+                    cell5.innerText = result[i].address;
+                    let cell6 = document.createElement("td");
+                    row.append(cell6);
+                    cell6.innerText = result[i].clientId;
+                    let cell7 = document.createElement("td");
+                    row.append(cell7);
+                    cell7.innerText = result[i].status;
+                }
+            })
+    }
+</script>
+</body>
+</html>

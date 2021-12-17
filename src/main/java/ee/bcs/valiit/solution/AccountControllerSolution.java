@@ -1,6 +1,5 @@
 package ee.bcs.valiit.solution;
 
-import ee.bcs.valiit.controller.SolutionDepositMoneyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;

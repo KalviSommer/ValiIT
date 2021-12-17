@@ -1,0 +1,20 @@
+td {
+    background-color: #06f1ea;
+    color: #050402;
+    border: solid 1px #030303;
+    size: 100px;
+    text-align: center;
+    text-align: justify-all;
+}
+h1.blueHeader {
+    color: blue;
+    font-family: "Calibri";
+}
+h2.redHeader {
+    color: darkred;
+    font-family: "Calibri";
+}
+table {border: 3px solid #050402
+}
+input {box-sizing: initial}
+button {break-inside: revert}

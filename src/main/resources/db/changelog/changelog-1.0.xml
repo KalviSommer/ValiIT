@@ -23,4 +23,85 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="2021-11-23 Add tables " author="Kalvi">
+        <createTable tableName="bank_account">
+            <column name="account_nr" type="text">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_name" type="text"/>
+            <column name="balance" type="int" />
+            <column name="status" type="boolean" defaultValue="false" />
+        </createTable>
+
+        <createTable tableName="employee">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="text"/>
+            <column name="position" type="text"/>
+            <column name="address" type="text"/>
+        </createTable>
+
+        <createTable tableName="transactions_history">
+            <column name="account_nr" type="text">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_name" type="text"/>
+            <column name="balance" type="text"/>
+            <column name="deposit" type="text"/>
+            <column name="withdrawal" type="text"/>
+            <column name="transfer" type="text"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2021-11-23 Add client table and make change for bank_account table" author="Kalvi">
+        <createTable tableName="client">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_name" type="text"/>
+        </createTable>
+        <addColumn tableName="bank_account">
+            <column name="client_id" type="int"/>
+        </addColumn>
+        <dropColumn tableName="bank_account">
+            <column name="owner_name" type="text"/>
+        </dropColumn>
+    </changeSet>
+    
+    <changeSet id="2021-11-23 Add foreignkey" author="Kalvi">
+        <addForeignKeyConstraint baseTableName="bank_account" baseColumnNames="client_id" constraintName="fk_bank_account_client" referencedTableName="client"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    
+    <changeSet id="2021-11-23 Change client name column to first and last name, and add address column" author="Kalvi">
+        <addColumn tableName="client">
+            <column name="first_name" type="text"/>
+            <column name="last_name" type="text"/>
+            <column name="address" type="text"/>
+        </addColumn>
+        <dropColumn tableName="client">
+            <column name="owner_name" type="text"/>
+        </dropColumn>
+    </changeSet>
+
+    <changeSet id="2021-11-24" author="Kalvi">
+        <renameColumn tableName="transactions_history" oldColumnName="deposit" newColumnName="amount"/>
+        <renameColumn tableName="transactions_history" oldColumnName="withdrawal" newColumnName="transaction_type"/>
+        <renameColumn tableName="transactions_history" oldColumnName="transfer" newColumnName="new_balance"/>
+    </changeSet>
+    <changeSet id="2021-12-13" author="Kalvi">
+        <createTable tableName="all_clients">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_name" type="text"/>
+            <column name="password" type="text"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

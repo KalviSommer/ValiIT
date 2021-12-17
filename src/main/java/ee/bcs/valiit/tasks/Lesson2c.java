@@ -3,7 +3,9 @@ package ee.bcs.valiit.tasks;
 public class Lesson2c {
 
     public static void main(String[] args) {
-
+//        System.out.println(nextElement(1));
+//        System.out.println(getSeqLength(10));
+        System.out.println(sequence3n(1,10));
     }
 
     // TODO
@@ -19,14 +21,21 @@ public class Lesson2c {
     // Siis tuleb vaadata, kui pikk jada tuleb kui esimene numbr on 10. Järgmisen tuleb arvutada number 11 jada pikkus.
     // jne. kuni numbrini 20
     // Tagastada tuleb kõige pikem number
-    // Näiteks sisendi 10 ja 20 puhul on vastus 20
-
+    // Näiteks sisendi 1 ja 10 puhul on vastus 20
     // TODO 3
     //  tehke tsükkel x -> y
     //  kutsuge iga väärtuse korral välja meetodit getSeqLength
     //  salvestage maha kõige suurem ja funktsiooni lõpus tagastage leitud arv
     public static int sequence3n(int x, int y) {
-        return 0;
+        int maxCount = 0;
+        for(int i = x;i<=y;i++){
+            x = i;
+        int count = getSeqLength(x);
+        if(count > maxCount){
+            maxCount = count;
+        }
+        }
+        return maxCount;
     }
 
     // TODO 2
@@ -35,7 +44,12 @@ public class Lesson2c {
     //  x = 1 ->1
     //  x = 2 -> 2
     public static int getSeqLength(int x){
-        return 0;
+        int count = 1;
+        while(x > 1){
+            x = nextElement(x);
+            count++;
+        }
+        return count;
     }
 
     // TODO 1
@@ -44,7 +58,14 @@ public class Lesson2c {
     //  x = 2 -> 1
     //  x = 3 -> 10
     public static int nextElement(int x){
-        return 0;
+        int firstElement = x;
+        int nextNumber;
+        if(firstElement % 2 == 0 ){
+            nextNumber = firstElement / 2;
+        }else{
+            nextNumber = 3 * firstElement + 1;
+        }return nextNumber;
+
     }
 
 }
